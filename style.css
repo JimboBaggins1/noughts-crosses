@@ -1,1 +1,13 @@
 /* style.css */
+
+.gameBoard {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    justify-content: center;
+}
+
+.box {
+    background-color: #d9d9d9;
+    border: 2px solid black;
+}
