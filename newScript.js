@@ -59,6 +59,32 @@ const GameController = function () {
     let playerMoveTrimmed = playerMove.replace(/\s/g, "").slice(0, 2);
     return playerMoveTrimmed;
   };
+
+  const PlayRound = function () {
+    console.log(`${currentPlayer.name}'s turn...`);
+    let move = ReadMove();
+    let newBoard = board.UpdateBoard(currentPlayer, move, currentPlayer.token);
+    console.log(newBoard);
+
+    // if (CheckWin(newBoard, currentPlayer.token)) {
+    //   console.log(`${currentPlayer.name} wins!`);
+    //   return 0;
+    // };
+
+    switch (CheckWin(newBoard, currentPlayer.token)) {
+      case true:
+        console.log(`${currentPlayer.name} wins!`);
+        return 0;
+      case -1:
+        console.log('It\'s a draw!');
+        return 0;
+      default:
+        break;
+    }
+
+    currentPlayer = SwitchPlayerTurn(currentPlayer);
+  };
+
   // Check win conditions. Accepts the most recent move, the token ('x' or 'o'), and the current board
   const CheckWin = function (currentBoard, currentToken) {
     // All possible win conditions
