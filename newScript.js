@@ -47,4 +47,9 @@ const GameController = function () {
 
   // set first player in game
   let currentPlayer = players[0];
+
+  // switches players
+  const SwitchPlayerTurn = function (activePlayer) {
+    return activePlayer === players[0] ? players[1] : players[0];
+  };
 }
