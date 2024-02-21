@@ -59,4 +59,50 @@ const GameController = function () {
     let playerMoveTrimmed = playerMove.replace(/\s/g, "").slice(0, 2);
     return playerMoveTrimmed;
   };
+  // Check win conditions. Accepts the most recent move, the token ('x' or 'o'), and the current board
+  const CheckWin = function (currentBoard, currentToken) {
+    // All possible win conditions
+    // TODO: Make this smarter
+    const winConditions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+
+    numCols = 3;
+
+    // Flatten 2D array to 1D
+    const flatBoard = currentBoard.flat();
+    // Returns a new array of all the squares currently occupied by the token
+    const currentPositions = flatBoard
+      .map(function (elem, index) {
+        return elem === currentToken ? index : "";
+      })
+      .filter(String);
+    console.log(currentPositions);
+
+    // Check if current board matches any of the possible win conditions
+    // Increase count by one each time a number matches
+    // A win condition is found if count == 3
+    const checkArr = winConditions.map((innerArray) => {
+      let count = 0;
+      currentPositions.forEach((elem) => {
+        if (innerArray.includes(elem)) count++;
+      });
+      return count;
+    });
+
+    if (checkArr.includes(numCols)) {
+      return checkArr.includes(numCols);
+    } else if (!flatBoard.includes(' ')) {
+      return -1;
+    } else {
+      return false;
+    };
+  };
 }
