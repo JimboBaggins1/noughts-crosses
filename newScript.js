@@ -24,3 +24,27 @@ const Gameboard = function () {
   };
   return { UpdateBoard };
 };
+
+const GameController = function () {
+  // define play board
+  const board = Gameboard();
+
+  // define players
+  // TODO: clean this up.
+  const playerOneName = "Player One";
+  const playerTwoName = "Player Two";
+
+  const players = [
+    {
+      name: playerOneName,
+      token: "o",
+    },
+    {
+      name: playerTwoName,
+      token: "x",
+    },
+  ];
+
+  // set first player in game
+  let currentPlayer = players[0];
+}
