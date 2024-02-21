@@ -131,4 +131,13 @@ const GameController = function () {
       return false;
     };
   };
+
+  return { PlayRound };
+};
+
+
+const game = GameController();
+while (game.PlayRound() !== 0) {
+  game.PlayRound();
+  //console.log(game.PlayRound);
 }
