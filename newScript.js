@@ -30,7 +30,7 @@ const Gameboard = function () {
 const GameController = function () {
   // define play board
   const board = Gameboard();
-
+  const screen = ScreenController();
   // define players
   // TODO: clean this up.
   const playerOneName = "Player One";
@@ -72,7 +72,7 @@ const GameController = function () {
     //   console.log(`${currentPlayer.name} wins!`);
     //   return 0;
     // };
-
+    screen.UpdateDisplay(newBoard);
     switch (CheckWin(newBoard, currentPlayer.token)) {
       case true:
         console.log(`${currentPlayer.name} wins!`);
@@ -106,6 +106,7 @@ const GameController = function () {
 
     // Flatten 2D array to 1D
     const flatBoard = currentBoard.flat();
+    console.log(flatBoard);
     // Returns a new array of all the squares currently occupied by the token
     const currentPositions = flatBoard
       .map(function (elem, index) {
@@ -142,7 +143,7 @@ const GameController = function () {
 const ScreenController = function () {
 
   // Build initial HTML display
-  const BuildBoard = function () {
+  const InitialDisplay = function () {
     // Define number of rows and cols and total squares
     const numRows = 3;
     const numCols = 3;
@@ -154,20 +155,33 @@ const ScreenController = function () {
       // Make each square a button so click register is more semantic
       const square = document.createElement('button');
       square.setAttribute('class', 'box');
+      square.setAttribute('id', i);
       // TODO: Get rid of 'o' placeholder
-      const text = document.createTextNode('o');
-      square.appendChild(text);
+      //const text = document.createTextNode('o');
+      //square.appendChild(text);
       gameBoard.appendChild(square);
     }
-    return gameBoard;
+  }
+  
+  // Update screen display
+  const UpdateDisplay = function (currentBoard) {
+    const flatBoard = currentBoard.flat();
+
+    flatBoard.forEach((elem, index) => {
+      const squareToBeUpdated = document.getElementById(index);
+      squareToBeUpdated.textContent = elem;
+    })
+
   }
 
-  return { BuildBoard }
+  
+
+  return { UpdateDisplay, InitialDisplay }
 }
 
 const screen = ScreenController();
 const game = GameController();
-screen.BuildBoard();
+screen.InitialDisplay();
 while (game.PlayRound() !== 0) {
   game.PlayRound();
   //console.log(game.PlayRound);
