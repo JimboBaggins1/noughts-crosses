@@ -1,5 +1,6 @@
 //newScript.js
 
+// Set up and update the game board
 const Gameboard = function () {
   //store the game board as an array
   const rows = 3;
@@ -25,6 +26,7 @@ const Gameboard = function () {
   return { UpdateBoard };
 };
 
+// Logic to control flow of game
 const GameController = function () {
   // define play board
   const board = Gameboard();
@@ -136,7 +138,36 @@ const GameController = function () {
 };
 
 
+// Controls game display
+const ScreenController = function () {
+
+  // Build initial HTML display
+  const BuildBoard = function () {
+    // Define number of rows and cols and total squares
+    const numRows = 3;
+    const numCols = 3;
+    const numSquares = numRows * numCols;
+
+    // Select HTML gameBoard div
+    const gameBoard = document.querySelector('.gameBoard');
+    for (let i = 0; i < numSquares; i++) {
+      // Make each square a button so click register is more semantic
+      const square = document.createElement('button');
+      square.setAttribute('class', 'box');
+      // TODO: Get rid of 'o' placeholder
+      const text = document.createTextNode('o');
+      square.appendChild(text);
+      gameBoard.appendChild(square);
+    }
+    return gameBoard;
+  }
+
+  return { BuildBoard }
+}
+
+const screen = ScreenController();
 const game = GameController();
+screen.BuildBoard();
 while (game.PlayRound() !== 0) {
   game.PlayRound();
   //console.log(game.PlayRound);
