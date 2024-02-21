@@ -11,4 +11,16 @@ const Gameboard = function () {
       board[i].push(" ");
     }
   }
+
+  const UpdateBoard = function (activePlayer, move, token) {
+    // move will be read in as 2 digit string, i.e. '12'
+    // need to separate into two 1 digit strings i.e. '1' and '2'
+    // these will be used as coords for the move
+    const coord1 = move.substr(0, 1);
+    const coord2 = move.substr(1, 1);
+
+    board[coord1][coord2] = token;
+    return board;
+  };
+  return { UpdateBoard };
 };
