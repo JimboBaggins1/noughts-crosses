@@ -52,4 +52,11 @@ const GameController = function () {
   const SwitchPlayerTurn = function (activePlayer) {
     return activePlayer === players[0] ? players[1] : players[0];
   };
+
+  const ReadMove = function () {
+    let playerMove = prompt("Enter your move:");
+    // TODO: This will be unnecessary when implementing UI. Remove all whitespace and only take the first two characters
+    let playerMoveTrimmed = playerMove.replace(/\s/g, "").slice(0, 2);
+    return playerMoveTrimmed;
+  };
 }
